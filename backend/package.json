@@ -12,6 +12,8 @@
   },
   "dependencies": {
     "apollo-server": "^2.15.0",
-    "graphql": "^15.1.0"
+    "graphql": "^15.1.0",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.2.25"
   }
 }

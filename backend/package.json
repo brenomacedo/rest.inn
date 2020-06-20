@@ -6,5 +6,12 @@
   "devDependencies": {
     "ts-node-dev": "^1.0.0-pre.49",
     "typescript": "^3.9.5"
+  },
+  "scripts": {
+    "dev": "ts-node-dev --ignore-watch node_modules src/index.ts --respawn --transpileOnly"
+  },
+  "dependencies": {
+    "apollo-server": "^2.15.0",
+    "graphql": "^15.1.0"
   }
 }

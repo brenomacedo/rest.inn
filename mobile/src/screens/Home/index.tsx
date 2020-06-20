@@ -12,7 +12,7 @@ const Home = () => {
     }
 
     return (
-        <View>
+        
            <ImageBackground style={styles.image} source={require('../../../assets/background.jpg')}>
                <Text style={styles.mainText}>rest.inn</Text>
                <Text style={styles.descText}>The best solution for rest during travels!</Text>
@@ -30,7 +30,7 @@ const Home = () => {
                     </RectButton>
                 </View>
            </ImageBackground>
-        </View>
+        
     )
 }
 

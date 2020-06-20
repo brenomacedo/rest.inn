@@ -1,14 +1,13 @@
 import React from 'react'
-import Home from './screens/Home'
-import { StyleSheet, View, Text, ImageBackground, Dimensions } from 'react-native'
 import 'react-native-gesture-handler'
+import Routes from './routes'
+import Home from './screens/Home'
+
 
 const App = () => {
     return (
-        <Home />
+        <Routes />
     )
 }
-
-
 
 export default App

@@ -16,7 +16,7 @@ export default gql`
     }
 
     type Mutation {
-        createInn(name: String!, description: String!, lat: Float!, lng: Float!, image: String!): [Inn!]!
+        createInn(name: String!, description: String!, lat: Float!, lng: Float!, image: String!): Inn!
     }
 
 `

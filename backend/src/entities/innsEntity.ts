@@ -1,12 +1,12 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm'
 
-@Entity()
-export class Inns {
+@Entity({ name: "inns" })
+export default class Inns {
     @PrimaryGeneratedColumn("increment")
     id!: number
 
     @Column({
-        type: 'string',
+        type: 'varchar',
         unique: true
     })
     name!: string

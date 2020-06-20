@@ -1,9 +1,9 @@
+import 'reflect-metadata'
 import { ApolloServer, gql } from 'apollo-server'
 import resolvers from './graphql/resolvers'
 import typeDefs from './graphql/schema'
 import { createConnection } from 'typeorm'
-import 'reflect-metadata'
-createConnection().then(res => {}).catch(err => {})
+createConnection()
 
 const server = new ApolloServer({
     typeDefs, resolvers

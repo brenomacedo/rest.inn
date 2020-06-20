@@ -4,5 +4,7 @@
     "port": 5432,
     "username": "postgres",
     "password": "123",
-    "database": "restinn"
+    "database": "restinn",
+    "entities": ["src/entities/innsEntity.ts"],
+    "synchronize": true
 }

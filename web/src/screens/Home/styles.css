@@ -1,0 +1,41 @@
+.home-presentation {
+    padding: 20px;
+    background-image: url('/house.jpg');
+    min-height: 100vh;
+    background-size: cover;
+    background-position: bottom;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.home-presentation h2 {
+    color: white;
+    font-size: 80px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: lighter;
+    text-align: center;
+    margin-top: 80px;
+}
+
+.home-presentation p {
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    color: white;
+    margin-top: 10px;
+    letter-spacing: 10px;
+}
+
+.home-presentation button {
+    background-color: #3f2eff;
+    padding: 20px;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    border: 0;
+    border-radius: 50px;
+    outline: none;
+    width: 200px;
+    margin: 100px 0;
+}

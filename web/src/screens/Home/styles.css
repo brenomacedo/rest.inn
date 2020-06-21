@@ -38,4 +38,60 @@
     outline: none;
     width: 200px;
     margin: 100px 0;
+    cursor: pointer;
+}
+
+.home-info {
+    display: flex;
+    background: #1e1661;
+}
+
+.home-info-item {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 40px;
+}
+
+.home-info-item .home-info-description {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    font-weight: lighter;
+}
+
+.home-info-item .home-info-description p {
+    width: 300px;
+    text-align: center;
+    letter-spacing: 3px;
+    padding: 8px;
+}
+
+.home-info-item .home-info-description h3 {
+    padding: 8px;
+}
+
+.home-info .home-info-item .home-info-image img {
+    width: 100px;
+}
+
+.footer {
+    padding: 20px;
+    background-color: #242424;
+}
+
+.footer p {
+    color: white;
+    font-size: 18px;
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    padding: 10px;
+}
+
+.footer p a {
+    color: white;
 }

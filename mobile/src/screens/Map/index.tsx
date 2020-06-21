@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, Image } from 'react-native'
 import { Feather } from '@expo/vector-icons'
 import MapView, { Marker } from 'react-native-maps'
 import { getCurrentPositionAsync } from 'expo-location'
+import { useNavigation } from '@react-navigation/native'
 
 const MapScreen = () => {
 
@@ -22,11 +23,17 @@ const MapScreen = () => {
         }).catch()        
     }, [])
 
+    const navigation = useNavigation()
+
+    const handleLogout = () => {
+        navigation.goBack()
+    }
+
 
     return (
         <View style={styles.container}>
             <View style={styles.goBack}>
-                <Feather name='arrow-left' color='blue' size={30} />
+                <Feather onPress={handleLogout} name='arrow-left' color='blue' size={30} />
             </View>
             <View style={styles.welcome}>
                 <Text style={styles.mainText}>
@@ -48,8 +55,14 @@ const MapScreen = () => {
                 longitude: position.lng,
                 latitudeDelta: 0.0922,
                 longitudeDelta: 0.0421
-            }}
-            />
+            }}>
+                <Marker coordinate={{ latitude: -3.6600647, longitude: -38.7559361 }}>
+                    <View style={styles.marker}>
+                        <Text style={styles.markerText}>asdasd</Text>
+                        <Image style={styles.markerIcon} source={require('../../../assets/house.png')} />
+                    </View>
+                </Marker>
+            </MapView>
             </View>
         </View>
     )
@@ -81,6 +94,18 @@ const styles = StyleSheet.create({
         margin: 20,
         flex: 1,
         borderRadius: 10
+    },
+    markerIcon: {
+        width: 40,
+        height: 40
+    },
+    markerText: {
+        backgroundColor: 'white',
+        padding: 3,
+        borderRadius: 5
+    },
+    marker: {
+        alignItems: 'center'
     }
 })
 

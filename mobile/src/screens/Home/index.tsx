@@ -2,10 +2,17 @@ import React from 'react'
 import { StyleSheet, View, Text, ImageBackground, Dimensions } from 'react-native'
 import { useFonts, Roboto_400Regular } from '@expo-google-fonts/roboto'
 import { RectButton } from 'react-native-gesture-handler'
+import { useNavigation } from '@react-navigation/native'
 
 const Home = () => {
 
     const [fontsLoaded] = useFonts({ Roboto_400Regular })
+
+    const navigation = useNavigation()
+
+    const handleLogin = () => {
+        navigation.navigate('Map')
+    }
 
     if(!fontsLoaded) {
         return <Text>Loading</Text>
@@ -25,7 +32,7 @@ const Home = () => {
                             <Text>CE</Text>
                         </View>
                     </View>
-                    <RectButton style={styles.button}>
+                    <RectButton onPress={handleLogin} style={styles.button}>
                         <Text style={styles.buttonText}>See inns</Text>
                     </RectButton>
                 </View>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import { Feather } from '@expo/vector-icons'
-import MapView from 'react-native-maps'
+import MapView, { Marker } from 'react-native-maps'
 import { getCurrentPositionAsync } from 'expo-location'
 
 const MapScreen = () => {

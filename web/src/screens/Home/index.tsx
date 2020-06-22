@@ -1,13 +1,21 @@
 import React from 'react'
 import './styles.css'
+import { useHistory } from 'react-router-dom'
 
 const Home = () => {
+
+    const history = useHistory()
+
+    const handleRegister = () => {
+        history.push('/register')
+    }
+
     return (
         <>
             <div className="home-presentation">
                 <h2>rest.inn</h2>
                 <p>The best solution for rest during travels!</p>
-                <button>Register an Inn!</button>
+                <button onClick={handleRegister}>Register an Inn!</button>
             </div>
             <div className="home-info">
                 <div className="home-info-item">

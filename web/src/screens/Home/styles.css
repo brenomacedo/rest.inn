@@ -95,3 +95,9 @@
 .footer p a {
     color: white;
 }
+
+@media screen and (max-width: 1160px) {
+    .home-info {
+        display: block;
+    }
+}

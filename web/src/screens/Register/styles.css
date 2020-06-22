@@ -1,0 +1,81 @@
+.register {
+    background: #fbabff;
+    min-height: 100vh;
+    padding: 50px;
+    display: flex;
+    justify-content: center;
+}
+
+.register .container h2 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 35px;
+}
+
+.register .container p {
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+}
+
+.container {
+    max-width: 600px;
+}
+
+.form {
+    margin-top: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.form p {
+    margin-top: 8px;
+}
+
+.form button {
+    background-color: #433bb3;
+    color: white;
+    font-size: 18px;
+    padding: 10px;
+    border: 0;
+    outline: 0;
+    width: 100%;
+    margin-top: 8px;
+}
+
+.register-text {
+    width: 100%;
+    font-size: 18px;
+    font-family: 'Roboto', sans-serif;
+    padding: 4px;
+    border: 0;
+    outline: none;
+    border-radius: 3px;
+}
+
+.register-textarea {
+    width: 100%;
+    height: 100px;
+    font-size: 18px;
+    padding: 4px;
+    border: 0;
+    outline: none;
+    font-family: 'Roboto', sans-serif;
+    margin-top: 8px;
+    border-radius: 3px;
+    resize: none;
+}
+
+.register-select {
+    width: calc(50% - 4px);
+    margin-top: 8px;
+    outline: none;
+    border: 0;
+    padding: 4px;
+}
+
+.register-map {
+    margin-top: 8px;
+    background-color: white;
+    width: 100%;
+    height: 400px;
+}

@@ -25,5 +25,8 @@ export default class Inns {
     lng!: number
 
     @Column()
-    image!: string
+    state!: string
+
+    @Column()
+    city!: string
 }

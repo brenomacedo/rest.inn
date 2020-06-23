@@ -13,7 +13,13 @@ interface Inn {
     description: string
     lat: number
     lng: number
-    image: string
+    state: string
+    city: string
+}
+
+interface Search {
+    state: string
+    city: string
 }
 
 export default {
@@ -26,7 +32,8 @@ export default {
             inns.description = args.description
             inns.lat = args.lat
             inns.lng = args.lng
-            inns.image = args.image
+            inns.state = args.state
+            inns.city = args.city
 
             
 
@@ -36,9 +43,14 @@ export default {
         }
     },
     Query: {
-        getInns: async () => {
+        getInns: async (root: any, args: Search) => {
             const repository = getConnectionManager().get().getRepository(InnsEntity)
-            const Inns = await repository.find()
+            const Inns = await repository.find({
+                where: {
+                    city: args.city,
+                    state: args.state
+                }
+            })
             return Inns
         }
     }

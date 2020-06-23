@@ -8,15 +8,16 @@ export default gql`
         description: String!
         lat: Float!
         lng: Float!
-        image: String!
+        state: String!
+        city: String!
     }
 
     type Query {
-        getInns: [Inn!]!
+        getInns(state: String!, city: String!): [Inn!]!
     }
 
     type Mutation {
-        createInn(name: String!, description: String!, lat: Float!, lng: Float!, image: String!): Inn!
+        createInn(name: String!, description: String!, lat: Float!, lng: Float!, state: String!, city: String!): Inn!
     }
 
 `

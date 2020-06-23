@@ -2,6 +2,7 @@ import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react'
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api'
 import axios from 'axios'
 import './styles.css'
+import { env } from 'process'
 
 const Register = () => {
 
@@ -30,7 +31,7 @@ const Register = () => {
 
     const handleSubmit = (event: FormEvent) => {
         event.preventDefault()
-        console.log(states)
+
     }
 
     const changedState = (event: ChangeEvent<HTMLSelectElement>) => {
@@ -66,7 +67,7 @@ const Register = () => {
                     </select>
                     <p>Select the location in the map below</p>
                     <div className="register-map">
-                        <LoadScript googleMapsApiKey='AIzaSyAYrVLhmBoNrZHNuz7JxaqO3Iy3EC_2XwU'>
+                        <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_KEY}>
                             <GoogleMap onClick={e => setMarkerLocation([e.latLng.lat(), e.latLng.lng()])} center={{
                                 lat: -3.5,
                                 lng: -40

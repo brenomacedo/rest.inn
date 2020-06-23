@@ -51,15 +51,15 @@ const Register = () => {
                 <p>Here you can register you inn, remember yourself to put the city and the state correctly for the place appear for the users in that place.</p>
                 <form className="form">
                     <input className="register-text" type="text" placeholder="name"/>
-                    <textarea className="register-textarea" placeholder="descrição"></textarea>
+                    <textarea className="register-textarea" placeholder="description"></textarea>
                     <select defaultValue='0' onChange={changedState} value={selectedState} className="register-select">
-                        <option disabled value="0">Selecione seu estado</option>
+                        <option disabled value="0">Select your state</option>
                         {states.map(state => (
                             <option key={state.id} value={state.sigla}>{state.sigla}</option>
                         ))}
                     </select>
                     <select onChange={changedCity} value={selectedCity} defaultValue='0' className="register-select">
-                        <option disabled value="0">Selecione sua cidade</option>
+                        <option disabled value="0">Select your city</option>
                         {cities.map(city => (
                             <option key={city.id} value={city.nome}>{city.nome}</option>
                         ))}

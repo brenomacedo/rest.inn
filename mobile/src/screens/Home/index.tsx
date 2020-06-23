@@ -1,17 +1,51 @@
-import React from 'react'
-import { StyleSheet, View, Text, ImageBackground, Dimensions } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { StyleSheet, View, Text, ImageBackground, Dimensions, Alert } from 'react-native'
 import { useFonts, Roboto_400Regular } from '@expo-google-fonts/roboto'
 import { RectButton } from 'react-native-gesture-handler'
 import { useNavigation } from '@react-navigation/native'
+import RNPicker from 'react-native-picker-select'
+import axios from 'axios'
 
 const Home = () => {
+
+    interface State {
+        id: number
+        nome: string
+        sigla: string
+    }
+
+    interface City {
+        id: number
+        nome: string
+    }
+
+    useEffect(() => {
+        axios.get('https://servicodados.ibge.gov.br/api/v1/localidades/estados')
+            .then(resp => setStates(resp.data))
+            .catch(err => console.log(err))
+    }, [])
+
+    const [states, setStates] = useState<State[]>([])
+    const [selectedState, setSelectedState] = useState<string>('')
+    const [cities, setCities] = useState<City[]>([])
+    const [selectedCity, setSelectedCity] = useState<string>('')
 
     const [fontsLoaded] = useFonts({ Roboto_400Regular })
 
     const navigation = useNavigation()
 
     const handleLogin = () => {
-        navigation.navigate('Map')
+        if(selectedState === '0' || selectedCity === '0') {
+            Alert.alert('Error', 'Select the state and the city!')
+        } else {
+            navigation.navigate('Map')
+        }
+    }
+
+    const changedState = (UF: string) => {
+        setSelectedState(UF)
+        axios.get<City[]>(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${UF}/municipios`)
+            .then(resp => setCities(resp.data))
     }
 
     if(!fontsLoaded) {
@@ -25,12 +59,18 @@ const Home = () => {
                <Text style={styles.descText}>The best solution for rest during travels!</Text>
                <View style={styles.form}>
                     <View style={styles.pickers}>
-                        <View style={styles.picker}>
-                            <Text>Fortaleza</Text>
-                        </View>
-                        <View style={styles.picker}>
-                            <Text>CE</Text>
-                        </View>
+                        <RNPicker value={selectedState} style={{
+                            inputAndroid: styles.picker,
+                            inputIOS: styles.picker
+                        }} onValueChange={UF => changedState(UF)} items={states.map(state => {
+                            return { label: state.sigla, value: state.sigla }
+                        })} placeholder={{ label: 'Selecione seu estado', value: '0' }}/>
+                        <RNPicker style={{
+                            inputAndroid: styles.picker,
+                            inputIOS: styles.picker
+                        }} value={selectedCity} onValueChange={city => setSelectedCity(city)} items={cities.map(city => {
+                            return { label: city.nome, value: city.nome }
+                        })} placeholder={{ label: 'Selecione sua cidade', value: '0' }} />
                     </View>
                     <RectButton onPress={handleLogin} style={styles.button}>
                         <Text style={styles.buttonText}>See inns</Text>

@@ -6,6 +6,7 @@ const Register = () => {
 
     const [markerLocation, setMarkerLocation] = useState<[number, number]>([0, 0])
 
+
     return (
         <div className="register">
             <div className="container">
@@ -29,14 +30,19 @@ const Register = () => {
                     <p>Select the location in the map below</p>
                     <div className="register-map">
                         <LoadScript googleMapsApiKey='AIzaSyAYrVLhmBoNrZHNuz7JxaqO3Iy3EC_2XwU'>
-                            <GoogleMap center={{
+                            <GoogleMap onClick={e => setMarkerLocation([e.latLng.lat(), e.latLng.lng()])} center={{
                                 lat: -3.5,
                                 lng: -40
                             }} zoom={10} mapContainerStyle={{
                                 width: '100%',
                                 height: '100%',
                                 borderRadius: '3px'
-                            }} />
+                            }}>
+                                <Marker position={{
+                                    lat: markerLocation[0],
+                                    lng: markerLocation[1]
+                                }} />
+                            </GoogleMap>
                         </LoadScript>
                     </div>
                     <button>CADASTRAR</button>

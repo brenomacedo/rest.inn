@@ -1,7 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api'
 import './styles.css'
 
 const Register = () => {
+
+    const [markerLocation, setMarkerLocation] = useState<[number, number]>([0, 0])
+
     return (
         <div className="register">
             <div className="container">
@@ -24,7 +28,16 @@ const Register = () => {
                     </select>
                     <p>Select the location in the map below</p>
                     <div className="register-map">
-
+                        <LoadScript googleMapsApiKey='AIzaSyAYrVLhmBoNrZHNuz7JxaqO3Iy3EC_2XwU'>
+                            <GoogleMap center={{
+                                lat: -3.5,
+                                lng: -40
+                            }} zoom={10} mapContainerStyle={{
+                                width: '100%',
+                                height: '100%',
+                                borderRadius: '3px'
+                            }} />
+                        </LoadScript>
                     </div>
                     <button>CADASTRAR</button>
                 </form>

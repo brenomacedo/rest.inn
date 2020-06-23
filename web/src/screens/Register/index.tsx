@@ -1,11 +1,48 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react'
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api'
+import axios from 'axios'
 import './styles.css'
 
 const Register = () => {
 
-    const [markerLocation, setMarkerLocation] = useState<[number, number]>([0, 0])
+    interface State {
+        id: number
+        sigla: string
+    }
 
+    interface City {
+        id: number
+        nome: string
+    }
+
+    useEffect(() => {
+        axios.get<State[]>('https://servicodados.ibge.gov.br/api/v1/localidades/estados')
+            .then(resp => {
+                setStates(resp.data)
+            }).catch(err => console.log(err))
+    }, [])
+
+    const [markerLocation, setMarkerLocation] = useState<[number, number]>([0, 0])
+    const [states, setStates] = useState<State[]>([])
+    const [selectedState, setSelectedState] = useState<string>('')
+    const [cities, setCities] = useState<City[]>([])
+    const [selectedCity, setSelectedCity] = useState<string>('')
+
+    const handleSubmit = (event: FormEvent) => {
+        event.preventDefault()
+        console.log(states)
+    }
+
+    const changedState = (event: ChangeEvent<HTMLSelectElement>) => {
+        const UF = event.target.value
+        setSelectedState(UF)
+        axios.get<City[]>(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${UF}/municipios`)
+            .then(resp => setCities(resp.data)).catch(err => console.log(err))
+    }
+
+    const changedCity = (event: ChangeEvent<HTMLSelectElement>) => {
+        setSelectedCity(event.target.value)
+    }
 
     return (
         <div className="register">
@@ -15,17 +52,17 @@ const Register = () => {
                 <form className="form">
                     <input className="register-text" type="text" placeholder="name"/>
                     <textarea className="register-textarea" placeholder="descrição"></textarea>
-                    <select className="register-select">
-                        <option value="">CE</option>
-                        <option value="">CE</option>
-                        <option value="">CE</option>
-                        <option value="">CE</option>
+                    <select defaultValue='0' onChange={changedState} value={selectedState} className="register-select">
+                        <option disabled value="0">Selecione seu estado</option>
+                        {states.map(state => (
+                            <option key={state.id} value={state.sigla}>{state.sigla}</option>
+                        ))}
                     </select>
-                    <select className="register-select">
-                        <option value="">Fortaleza</option>
-                        <option value="">Fortaleza</option>
-                        <option value="">Fortaleza</option>
-                        <option value="">Fortaleza</option>
+                    <select onChange={changedCity} value={selectedCity} defaultValue='0' className="register-select">
+                        <option disabled value="0">Selecione sua cidade</option>
+                        {cities.map(city => (
+                            <option key={city.id} value={city.nome}>{city.nome}</option>
+                        ))}
                     </select>
                     <p>Select the location in the map below</p>
                     <div className="register-map">
@@ -45,7 +82,7 @@ const Register = () => {
                             </GoogleMap>
                         </LoadScript>
                     </div>
-                    <button>CADASTRAR</button>
+                    <button onClick={handleSubmit}>CADASTRAR</button>
                 </form>
             </div>
         </div>

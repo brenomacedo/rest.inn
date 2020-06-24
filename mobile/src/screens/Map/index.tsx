@@ -20,6 +20,15 @@ const MapScreen = () => {
         city: string
     }
 
+    interface IQueryData {
+        getInns: IInn[]
+    }
+
+    interface IQueryVars {
+        city: string
+        state: string
+    }
+
     interface IPosition {
         lat: number
         lng: number
@@ -44,7 +53,6 @@ const MapScreen = () => {
             })
         }).catch()
 
-        console.log(data.getInns)
     }, [])
 
     const navigation = useNavigation()
@@ -67,7 +75,7 @@ const MapScreen = () => {
         }
     `
 
-    const { error, loading, data } = useQuery(GET_INNS, {
+    const { error, loading, data } = useQuery<IQueryData, IQueryVars>(GET_INNS, {
         variables: {
             city: route.params.city,
             state: route.params.state
@@ -108,9 +116,11 @@ const MapScreen = () => {
                 latitudeDelta: 0.0922,
                 longitudeDelta: 0.0421
             }}>
-                {data.getInns.map((item: any) => {
+                {data?.getInns.map((item) => {
                     return (
-                        <Marker key={item.id} coordinate={{ latitude: item.lat, longitude: item.lng }}>
+                        <Marker onPress={() => {
+                            navigation.navigate('Details', item)
+                        }} key={item.id} coordinate={{ latitude: item.lat, longitude: item.lng }}>
                             <View style={styles.marker}>
                                 <Text style={styles.markerText}>{item.name}</Text>
                                 <Image style={styles.markerIcon} source={require('../../../assets/house.png')} />

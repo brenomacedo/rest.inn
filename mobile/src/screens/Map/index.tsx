@@ -3,14 +3,36 @@ import { View, Text, StyleSheet, Image } from 'react-native'
 import { Feather } from '@expo/vector-icons'
 import MapView, { Marker } from 'react-native-maps'
 import { getCurrentPositionAsync } from 'expo-location'
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation, useRoute, RouteProp } from '@react-navigation/native'
+import { useQuery } from '@apollo/react-hooks'
+import { gql } from 'apollo-boost'
+
 
 const MapScreen = () => {
+
+    interface IInn {
+        id: number
+        name: string
+        description: string
+        lat: number
+        lng: number
+        state: string
+        city: string
+    }
 
     interface IPosition {
         lat: number
         lng: number
     }
+
+    type ISearch = {
+        search: {
+            state: string
+            city: string
+        }
+    }
+
+    const route = useRoute<RouteProp<ISearch, 'search'>>()
 
     const [position, setPosition] = useState<IPosition>({ lat: 0, lng: 0 })
 
@@ -20,7 +42,9 @@ const MapScreen = () => {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
             })
-        }).catch()        
+        }).catch()
+
+        console.log(data.getInns)
     }, [])
 
     const navigation = useNavigation()
@@ -29,6 +53,34 @@ const MapScreen = () => {
         navigation.goBack()
     }
 
+    const GET_INNS = gql`
+        query GetInns ($city: String!, $state: String!) {
+            getInns (city: $city, state: $state) {
+                id
+                name
+                description
+                lat
+                lng
+                city
+                state
+            }
+        }
+    `
+
+    const { error, loading, data } = useQuery(GET_INNS, {
+        variables: {
+            city: route.params.city,
+            state: route.params.state
+        }
+    })
+
+    if(error) {
+        <Text>Error</Text>
+    }
+
+    if(loading) {
+        <Text>Loading</Text>
+    }
 
     return (
         <View style={styles.container}>
@@ -56,12 +108,16 @@ const MapScreen = () => {
                 latitudeDelta: 0.0922,
                 longitudeDelta: 0.0421
             }}>
-                <Marker coordinate={{ latitude: -3.6600647, longitude: -38.7559361 }}>
-                    <View style={styles.marker}>
-                        <Text style={styles.markerText}>asdasd</Text>
-                        <Image style={styles.markerIcon} source={require('../../../assets/house.png')} />
-                    </View>
-                </Marker>
+                {data.getInns.map((item: any) => {
+                    return (
+                        <Marker key={item.id} coordinate={{ latitude: item.lat, longitude: item.lng }}>
+                            <View style={styles.marker}>
+                                <Text style={styles.markerText}>{item.name}</Text>
+                                <Image style={styles.markerIcon} source={require('../../../assets/house.png')} />
+                            </View>
+                        </Marker>
+                    )
+                })}
             </MapView>
             </View>
         </View>

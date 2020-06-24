@@ -38,7 +38,10 @@ const Home = () => {
         if(selectedState === '0' || selectedCity === '0') {
             Alert.alert('Error', 'Select the state and the city!')
         } else {
-            navigation.navigate('Map')
+            navigation.navigate('Map', {
+                city: selectedCity,
+                state: selectedState
+            })
         }
     }
 

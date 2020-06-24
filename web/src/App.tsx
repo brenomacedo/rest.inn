@@ -1,5 +1,4 @@
 import React from 'react'
-import Home from './screens/Home'
 import Routes from './routes'
 import ApolloClient from 'apollo-boost'
 import { ApolloProvider } from '@apollo/react-hooks'

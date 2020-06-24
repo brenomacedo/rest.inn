@@ -25,6 +25,15 @@ const Register = () => {
             }).catch(err => console.log(err))
     }, [])
 
+    useEffect(() => {
+        navigator.geolocation.getCurrentPosition(position => {
+            const { latitude, longitude } = position.coords
+            setPosition([latitude, longitude])
+        }, error => {
+
+        })
+    }, [])
+
     const history = useHistory()
 
     const [name, setName] = useState('')
@@ -34,6 +43,7 @@ const Register = () => {
     const [selectedState, setSelectedState] = useState<string>('0')
     const [cities, setCities] = useState<City[]>([])
     const [selectedCity, setSelectedCity] = useState<string>('0')
+    const [position, setPosition] = useState<[number, number]>([0,0])
 
     const handleSubmit = (event: FormEvent) => {
         event.preventDefault()
@@ -123,8 +133,8 @@ const Register = () => {
                     <div className="register-map">
                         <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_KEY}>
                             <GoogleMap onClick={e => setMarkerLocation([e.latLng.lat(), e.latLng.lng()])} center={{
-                                lat: -3.5,
-                                lng: -40
+                                lat: position[0],
+                                lng: position[1]
                             }} zoom={10} mapContainerStyle={{
                                 width: '100%',
                                 height: '100%',

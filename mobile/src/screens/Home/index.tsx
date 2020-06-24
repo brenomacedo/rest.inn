@@ -67,13 +67,13 @@ const Home = () => {
                             inputIOS: styles.picker
                         }} onValueChange={UF => changedState(UF)} items={states.map(state => {
                             return { label: state.sigla, value: state.sigla }
-                        })} placeholder={{ label: 'Selecione seu estado', value: '0' }}/>
+                        })} placeholder={{ label: 'Select your state', value: '0' }}/>
                         <RNPicker style={{
                             inputAndroid: styles.picker,
                             inputIOS: styles.picker
                         }} value={selectedCity} onValueChange={city => setSelectedCity(city)} items={cities.map(city => {
                             return { label: city.nome, value: city.nome }
-                        })} placeholder={{ label: 'Selecione sua cidade', value: '0' }} />
+                        })} placeholder={{ label: 'Select your city', value: '0' }} />
                     </View>
                     <RectButton onPress={handleLogin} style={styles.button}>
                         <Text style={styles.buttonText}>See inns</Text>

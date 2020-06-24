@@ -79,7 +79,8 @@ const MapScreen = () => {
         variables: {
             city: route.params.city,
             state: route.params.state
-        }
+        },
+        pollInterval: 500
     })
 
     if(error) {

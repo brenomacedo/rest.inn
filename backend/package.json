@@ -8,7 +8,8 @@
     "typescript": "^3.9.5"
   },
   "scripts": {
-    "dev": "ts-node-dev --ignore-watch node_modules src/index.ts --respawn --transpileOnly"
+    "dev": "ts-node-dev --ignore-watch node_modules src/index.ts --respawn --transpileOnly",
+    "start": "ts-node src/index.ts"
   },
   "dependencies": {
     "apollo-server": "^2.15.0",
